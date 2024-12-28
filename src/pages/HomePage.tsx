@@ -11,10 +11,17 @@ const HomePage = () => {
   const [year, setYear] = useState<string>("");
   const [type, setType] = useState<"movie" | "series" | "episode" | "">("");
   const [years, setYears] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   useEffect(() => {
     const getMovies = async () => {
-      const { movies } = await fetchMovies(searchTerm || "Pokemon", year, type);
+      const { movies, totalPages } = await fetchMovies(
+        searchTerm || "Pokemon",
+        year,
+        type,
+        currentPage
+      );
 
       const moviesWithPoster = movies.map((movie: MovieDetail) => ({
         ...movie,
@@ -22,6 +29,7 @@ const HomePage = () => {
       }));
 
       setMovies(moviesWithPoster);
+      setTotalPages(totalPages);
     };
 
     const getYears = async () => {
@@ -36,10 +44,16 @@ const HomePage = () => {
 
     getMovies();
     getYears();
-  }, [searchTerm, year, type]);
+  }, [searchTerm, year, type, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
-    <div className="bg-dark text-light p-8">
+    <div className="bg-dark text-light p-8 flex flex-col items-center">
       <LogoWithTitle />
       <SearchBar
         searchTerm={searchTerm}
@@ -51,6 +65,25 @@ const HomePage = () => {
         setType={setType}
       />
       <MovieList movies={movies} />
+      <div className="flex justify-center items-center gap-4 mt-6">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          className="bg-primary text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="text-white">
+          {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          className="bg-primary text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

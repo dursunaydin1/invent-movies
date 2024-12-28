@@ -1,7 +1,5 @@
-import axios from "axios";
+import apiClient from "./apiClient";
 import { MovieSearch, MovieResponse, MovieDetail } from "../types/movie";
-
-const API_KEY = process.env.OMDB_API_KEY || "6b1213bb";
 
 export const fetchMovies = async (
   searchTerm: string = "",
@@ -11,18 +9,14 @@ export const fetchMovies = async (
   limit: number = 10
 ): Promise<{ movies: MovieSearch[]; totalPages: number }> => {
   try {
-    const response = await axios.get<MovieResponse>(
-      "https://www.omdbapi.com/",
-      {
-        params: {
-          s: searchTerm || "Pokemon",
-          y: year,
-          type: type,
-          page: page,
-          apiKey: API_KEY,
-        },
-      }
-    );
+    const response = await apiClient.get<MovieResponse>("", {
+      params: {
+        s: searchTerm || "Pokemon",
+        y: year,
+        type: type,
+        page: page,
+      },
+    });
 
     if (response.data.Response === "True") {
       const totalResults = parseInt(response.data.totalResults, 10);
@@ -35,7 +29,7 @@ export const fetchMovies = async (
       throw new Error("No movies found");
     }
   } catch (error) {
-    console.error("Error fetching movies:", error);
+    // console.error("Error fetching movies:", error);
     return { movies: [], totalPages: 1 };
   }
 };
@@ -44,10 +38,9 @@ export const fetchMovieDetails = async (
   id: string
 ): Promise<MovieDetail | null> => {
   try {
-    const response = await axios.get("https://www.omdbapi.com/", {
+    const response = await apiClient.get("", {
       params: {
         i: id,
-        apiKey: API_KEY,
       },
     });
 
@@ -57,13 +50,20 @@ export const fetchMovieDetails = async (
         Title: response.data.Title,
         Year: response.data.Year,
         Poster: response.data.Poster || undefined,
+        Runtime: response.data.Runtime || undefined,
+        Genre: response.data.Genre || undefined,
+        Director: response.data.Director || undefined,
+        Actors: response.data.Actors || undefined,
+        imdbRating: response.data.imdbRating || undefined,
+        Plot: response.data.Plot || undefined,
+        Released: response.data.Released || undefined,
       };
       return movieDetail;
     } else {
       throw new Error("Failed to fetch movie details");
     }
   } catch (error) {
-    console.error("Error fetching movie details:", error);
+    // console.error("Error fetching movie details:", error);
     return null;
   }
 };

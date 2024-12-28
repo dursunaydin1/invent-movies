@@ -13,6 +13,13 @@ export interface MovieDetail {
   Title: string;
   Year: string;
   Poster?: string;
+  Runtime?: string;
+  Genre?: string;
+  Director?: string;
+  Actors?: string;
+  imdbRating?: string;
+  Plot?: string;
+  Released?: string;
 }
 
 export interface MovieSearch {

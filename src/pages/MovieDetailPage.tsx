@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchMovieDetails } from "../services/movieService";
 
 const MovieDetailPage = () => {
@@ -7,6 +7,7 @@ const MovieDetailPage = () => {
   const [movie, setMovie] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -29,15 +30,24 @@ const MovieDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="bg-dark text-light p-8 flex justify-center items-center">
-        <h1 className="text-4xl font-bold">Loading...</h1>
+      <div className="bg-dark text-light p-8 flex justify-center items-center min-h-screen">
+        <div className="flex flex-col items-center">
+          {/* Spinner veya Loading animasyonu */}
+          <div
+            className="spinner-border animate-spin inline-block w-16 h-16 border-4 border-t-4 border-gray-200 rounded-full mb-4"
+            role="status"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
+          <h1 className="text-4xl font-bold">Loading...</h1>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-dark text-light p-8 flex justify-center items-center">
+      <div className="bg-dark text-light p-8 flex justify-center items-center min-h-screen">
         <h1 className="text-4xl font-bold">{error}</h1>
       </div>
     );
@@ -45,7 +55,7 @@ const MovieDetailPage = () => {
 
   if (!movie) {
     return (
-      <div className="bg-dark text-light p-8 flex justify-center items-center">
+      <div className="bg-dark text-light p-8 flex justify-center items-center min-h-screen">
         <h1 className="text-4xl font-bold">Movie not found</h1>
       </div>
     );
@@ -83,6 +93,13 @@ const MovieDetailPage = () => {
             <strong>Release Date:</strong> {movie.Released}
           </p>
         </div>
+
+        <button
+          onClick={() => navigate("/")} // Ana sayfaya yönlendirme
+          className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+        >
+          Go Back to Home
+        </button>
       </div>
     </div>
   );
