@@ -8,19 +8,16 @@ const MovieCard = ({ title, releaseDate, imdbID, poster }: any) => {
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className="cursor-pointer bg-gray-800 text-light rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105"
-    >
-      <img src={poster} alt={title} className="w-full h-48 object-cover" />
-      <div className="p-4 flex flex-col justify-between">
-        <h2 className="text-xl font-semibold text-white mb-2">{title}</h2>
-        <div className="flex justify-between text-sm text-gray-200">
-          <div>
+    <div onClick={handleClick} className="movie-card">
+      <img src={poster} alt={title} className="movie-card-img" />
+      <div className="movie-card-content">
+        <h2 className="movie-card-title">{title}</h2>
+        <div className="movie-card-details">
+          <div className="movie-card-detail">
             <p className="font-semibold">Release Date:</p>
             <p>{releaseDate}</p>
           </div>
-          <div>
+          <div className="movie-card-detail">
             <p className="font-semibold">IMDb ID:</p>
             <p>{imdbID}</p>
           </div>

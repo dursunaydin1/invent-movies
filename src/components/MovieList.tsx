@@ -3,15 +3,16 @@ import { MovieDetail } from "../types/movie";
 
 const MovieList = ({ movies }: { movies: MovieDetail[] }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="movie-list">
       {movies.map((movie) => (
-        <MovieCard
-          key={movie.imdbID}
-          title={movie.Title}
-          releaseDate={movie.Year}
-          imdbID={movie.imdbID}
-          poster={movie.Poster}
-        />
+        <div key={movie.imdbID} className="movie-list-item">
+          <MovieCard
+            title={movie.Title}
+            releaseDate={movie.Year}
+            imdbID={movie.imdbID}
+            poster={movie.Poster}
+          />
+        </div>
       ))}
     </div>
   );

@@ -53,7 +53,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="bg-dark text-light p-8 flex flex-col items-center">
+    <div className="home-page">
       <LogoWithTitle />
       <SearchBar
         searchTerm={searchTerm}
@@ -65,20 +65,20 @@ const HomePage = () => {
         setType={setType}
       />
       <MovieList movies={movies} />
-      <div className="flex justify-center items-center gap-4 mt-6">
+      <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          className="bg-primary text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          className="pagination-button"
           disabled={currentPage === 1}
         >
           Previous
         </button>
-        <span className="text-white">
+        <span className="pagination-text">
           {currentPage} of {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          className="bg-primary text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          className="pagination-button"
           disabled={currentPage === totalPages}
         >
           Next

@@ -26,11 +26,12 @@ export const fetchMovies = async (
         totalPages: totalPages,
       };
     } else {
-      throw new Error("No movies found");
+      console.warn("No movies found");
+      return { movies: [], totalPages: 0 };
     }
   } catch (error) {
-    // console.error("Error fetching movies:", error);
-    return { movies: [], totalPages: 1 };
+    console.error("Error fetching movies:", error);
+    return { movies: [], totalPages: 0 };
   }
 };
 
@@ -45,7 +46,7 @@ export const fetchMovieDetails = async (
     });
 
     if (response.data.Response === "True") {
-      const movieDetail: MovieDetail = {
+      return {
         imdbID: response.data.imdbID,
         Title: response.data.Title,
         Year: response.data.Year,
@@ -58,12 +59,12 @@ export const fetchMovieDetails = async (
         Plot: response.data.Plot || undefined,
         Released: response.data.Released || undefined,
       };
-      return movieDetail;
     } else {
-      throw new Error("Failed to fetch movie details");
+      console.warn("Failed to fetch movie details for id:", id);
+      return null;
     }
   } catch (error) {
-    // console.error("Error fetching movie details:", error);
+    console.error("Error fetching movie details:", error);
     return null;
   }
 };

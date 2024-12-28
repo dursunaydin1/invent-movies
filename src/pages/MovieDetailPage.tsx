@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchMovieDetails } from "../services/movieService";
+import "../styles/styles.scss";
 
 const MovieDetailPage = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
@@ -68,7 +69,7 @@ const MovieDetailPage = () => {
         <img
           src={movie.Poster}
           alt={movie.Title}
-          className="w-full h-96 object-cover mb-6 rounded-md"
+          className="movie-poster" /* Yeni stil sınıfı */
         />
         <div className="space-y-4">
           <p>
@@ -95,7 +96,7 @@ const MovieDetailPage = () => {
         </div>
 
         <button
-          onClick={() => navigate("/")} // Ana sayfaya yönlendirme
+          onClick={() => navigate("/")}
           className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
         >
           Go Back to Home

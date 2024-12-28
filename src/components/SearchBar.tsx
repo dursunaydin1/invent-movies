@@ -1,6 +1,4 @@
-import React from "react";
 import { SearchBarProps } from "../types/movie";
-
 const SearchBar: React.FC<SearchBarProps> = ({
   searchTerm,
   setSearchTerm,
@@ -10,18 +8,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
   type,
   setType,
 }) => (
-  <div className="flex flex-wrap gap-4 mb-6">
+  <div className="search-bar">
     <input
       type="text"
       placeholder="Search movies"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="p-2 border rounded-md w-full sm:w-auto max-w-xs text-black"
+      className="search-bar-input"
     />
     <select
       value={year}
       onChange={(e) => setYear(e.target.value)}
-      className="p-2 border rounded-md w-full sm:w-auto max-w-xs text-black"
+      className="search-bar-select"
     >
       <option value="" disabled>
         Select Year
@@ -38,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onChange={(e) =>
         setType(e.target.value as "movie" | "series" | "episode" | "")
       }
-      className="p-2 border rounded-md w-full sm:w-auto max-w-xs text-black"
+      className="search-bar-select"
     >
       <option value="" disabled>
         Please Select a Type

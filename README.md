@@ -1,6 +1,6 @@
 # Invent Movies
 
-`Invent Movies`, film ve dizi araması yapmanıza olanak tanıyan bir web uygulamasıdır. Bu uygulama, React ve Tailwind CSS kullanılarak geliştirilmiştir. Kullanıcılar film ve dizi detaylarını inceleyebilir, farklı kategorilere göre filtreleme yapabilir ve IMDb bilgilerini görebilir.
+`Invent Movies`, film ve dizi araması yapmanıza olanak tanıyan bir web uygulamasıdır. Bu uygulama, React ve SCSS kullanılarak geliştirilmiştir. Kullanıcılar film ve dizi detaylarını inceleyebilir, farklı kategorilere göre filtreleme yapabilir ve IMDb bilgilerini görebilir.
 
 ## Özellikler
 
@@ -12,7 +12,7 @@
 ## Kullanılan Teknolojiler
 
 - **React**: Bileşen tabanlı kullanıcı arayüzü geliştirme.
-- **Tailwind CSS**: Hızlı ve modern stil yapısı.
+- **SCSS(Sass)**: Hızlı ve modern stil yapısı.
 - **React Router**: Sayfa yönlendirmeleri için.
 - **Axios**: API istekleri yapmak için.
 - **TypeScript**: Tip güvenliği ve kod kalitesini artırmak için.
@@ -56,7 +56,7 @@ Uygulama, OMDB API'sini kullanmaktadır. Başlamadan önce bir API anahtarı alm
 3. `.env` dosyasına aşağıdaki satırı ekleyin:
 
 ```env
-OMDB_API_KEY =your_api_key
+REACT_APP_OMDB_API_KEY =your_api_key
 ```
 
 ## Ön İzleme
