@@ -63,7 +63,7 @@ REACT_APP_OMDB_API_KEY =your_api_key
 
 Uygulamayı canlı olarak görmek için aşağıdaki bağlantıyı kullanabilirsiniz:
 
-[Canlı Ön İzleme (Netlify)](https://your-netlify-link.netlify.app)
+[Canlı Ön İzleme (Netlify)](https://invent-movie-app.netlify.app/)
 
 ## Uygulama Görseli
 
